@@ -34,6 +34,7 @@ const App = () => {
     setData(db_costumer);
   }, [setData]);
 
+
   const handleRemove = (email) => {
     const newArray = data.filter((item) => item.email !== email);
 
@@ -90,7 +91,7 @@ const App = () => {
                 <Tr key={index} cursor="pointer " _hover={{ bg: "gray.100" }}>
                   <Td maxW={isMobile ? 5 : 100} textAlign="center">{name}</Td>
                   <Td maxW={isMobile ? 5 : 100} textAlign="center">{email}</Td>
-                  <Td maxW={isMobile ? 5 : 100} textAlign="center">{senha}</Td>
+                  <Td maxW={isMobile ? 5 : 100} textAlign="center" visibility={"hidden"}>{senha}</Td>
                   <Td maxW={isMobile ? 5 : 100} textAlign="center">{dataNasc}</Td>
                   <Td p={0}>
                     <EditIcon
