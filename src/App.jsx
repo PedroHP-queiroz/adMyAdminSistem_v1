@@ -11,6 +11,7 @@ import {
   Tbody,
   Td,
   useBreakpointValue,
+  color,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ModalComp from "./components/ModalComp";
@@ -19,6 +20,9 @@ const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [data, setData] = useState([]);
   const [dataEdit, setDataEdit] = useState({});
+
+
+
 
 
   const isMobile = useBreakpointValue({
@@ -33,6 +37,8 @@ const App = () => {
 
     setData(db_costumer);
   }, [setData]);
+
+
 
 
   const handleRemove = (email) => {
@@ -58,12 +64,7 @@ const App = () => {
           <Button colorScheme="green" height="70px" margin="20px" display="inline-block" textAlign="center" gap="20px" onClick={() => [setDataEdit({}), onOpen()]}>
           <AddIcon 
           fontSize={30}
-          />
-          </Button>
-          <Button colorScheme="red" height="70px" margin="10px" display="inline-block" alignItems="center"  justifyContent="center" textAlign="center" gap="20px">
-          <CloseIcon
-          fontSize={30}
-          />
+          />  Novo cadastro
           </Button>
           </Box>
         <Box overflowY="auto" height="100%">
@@ -91,19 +92,10 @@ const App = () => {
                 <Tr key={index} cursor="pointer " _hover={{ bg: "gray.100" }}>
                   <Td maxW={isMobile ? 5 : 100} textAlign="center">{name}</Td>
                   <Td maxW={isMobile ? 5 : 100} textAlign="center">{email}</Td>
-                  <Td maxW={isMobile ? 5 : 100} textAlign="center" visibility={"hidden"}>{senha}</Td>
+                  <Td maxW={isMobile ? 5 : 100} textAlign="center">{senha}</Td>
                   <Td maxW={isMobile ? 5 : 100} textAlign="center">{dataNasc}</Td>
                   <Td p={0}>
                     <EditIcon
-                      fontSize={25}
-                      onClick={() => [
-                        setDataEdit({ name, email, index, senha, dataNasc }),
-                        onOpen(),
-                      ]}
-                    />
-                  </Td>
-                  <Td p={0}>
-                    <ViewIcon
                       fontSize={25}
                       onClick={() => [
                         setDataEdit({ name, email, index, senha, dataNasc }),
