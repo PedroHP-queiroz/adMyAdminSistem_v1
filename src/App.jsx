@@ -14,14 +14,13 @@ import {
   color,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import CardComp from "./components/CardComp";
 import ModalComp from "./components/ModalComp";
 
 const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [data, setData] = useState([]);
   const [dataEdit, setDataEdit] = useState({});
-
-
 
 
 
@@ -39,8 +38,6 @@ const App = () => {
   }, [setData]);
 
 
-
-
   const handleRemove = (email) => {
     const newArray = data.filter((item) => item.email !== email);
 
@@ -48,6 +45,10 @@ const App = () => {
 
     localStorage.setItem("cad_cliente", JSON.stringify(newArray));
 
+  };
+
+  const viewInfo = () => {
+    return CardComp
   };
 
   return (
@@ -61,11 +62,13 @@ const App = () => {
       <Box maxW="100vw" w="100%" h="100vh" py={8} px={4}>
 
           <Box>
+            
           <Button colorScheme="green" height="70px" margin="20px" display="inline-block" textAlign="center" gap="20px" onClick={() => [setDataEdit({}), onOpen()]}>
           <AddIcon 
           fontSize={30}
-          />  Novo cadastro
+          />
           </Button>
+          <h1>aDmYaDmIn V1</h1>
           </Box>
         <Box overflowY="auto" height="100%">
           <Table mt="6">
@@ -109,6 +112,15 @@ const App = () => {
                       onClick={() => handleRemove(email)}
                     />
                   </Td>
+                  <Td p={0}>
+                    <ViewIcon
+                      fontSize={25}
+                      onClick={() => [
+                      viewInfo({ name, email, index, senha, dataNasc }),
+                      onOpen(),
+                      ]}
+                    />
+                  </Td>
                 </Tr>
               ))}
             </Tbody>
@@ -118,6 +130,7 @@ const App = () => {
 
 
       {isOpen && (
+        <>
         <ModalComp
           isOpen={isOpen}
           onClose={onClose}
@@ -126,6 +139,16 @@ const App = () => {
           dataEdit={dataEdit}
           setDataEdit={setDataEdit}
         />
+        
+        <CardComp
+        isOpen={isOpen}
+        onClose={onClose}
+        data={data}
+        setData={setData}
+        dataEdit={dataEdit}
+        setDataEdit={setDataEdit}
+      />
+      </>
       )}
     </Flex>
   );
