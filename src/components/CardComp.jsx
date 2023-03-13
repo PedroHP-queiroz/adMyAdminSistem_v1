@@ -14,11 +14,11 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
-  const [name, setName] = useState(dataEdit.name || "");
-  const [email, setEmail] = useState(dataEdit.email || "");
-  const [senha, setSenha] = useState(dataEdit.senha ||"");
-  const [dataNasc, setDataNasc] = useState(dataEdit.dataNasc || "")
+const CardComp = ({ data, setData, isOpen, onClose }) => {
+  const name = useState(data.name || "");
+  const email = useState(data.email || "");
+  const senha  = useState(data.senha ||"");
+  const dataNasc = useState(data.dataNasc || "")
 
   const handleSave = () => {
     if (!name || !email) return;
@@ -27,11 +27,11 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
       return alert("E-mail já cadastrado!");
     }
 
-    if (Object.keys(dataEdit).length) {
-      data[dataEdit.index] = { name, email, senha, dataNasc };
+    if (Object.keys(data).length) {
+      data[data.index] = { name, email, senha, dataNasc };
     }
 
-    const newDataArray = !Object.keys(dataEdit).length
+    const newDataArray = !Object.keys(data).length
       ? [...(data ? data : []), { name, email, senha, dataNasc }]
       : [...(data ? data : [])];
 
@@ -55,7 +55,7 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Cadastro de usuario:</ModalHeader>
+          <ModalHeader>Usuario:</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <FormControl display="flex" flexDir="column" gap={4}>
@@ -64,7 +64,6 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
                 <Input
                   type="text"
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
                 />
               </Box>
               <Box>
@@ -72,7 +71,6 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
                 <Input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Box>
               <Box>
@@ -80,7 +78,6 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
                 <Input
                   type="date"
                   value={dataNasc}
-                  onChange={(e) => setDataNasc(e.target.value)}
                 />
               </Box>
               <Box>
@@ -88,18 +85,14 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
                 <Input
                   type="text"
                   value={senha}
-                  onChange={(e) => setSenha(e.target.value)}
                 />
               </Box>
             </FormControl>
           </ModalBody>
 
           <ModalFooter justifyContent="start">
-            <Button colorScheme="green" mr={3} onClick={handleSave}>
-              SALVAR
-            </Button>
             <Button colorScheme="red" onClick={onClose}>
-              CANCELAR
+              Sair
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -108,4 +101,4 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
   );
 };
 
-export default ModalComp;
+export default CardComp;

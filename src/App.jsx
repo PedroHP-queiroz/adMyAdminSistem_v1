@@ -11,10 +11,8 @@ import {
   Tbody,
   Td,
   useBreakpointValue,
-  color,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import CardComp from "./components/CardComp";
 import ModalComp from "./components/ModalComp";
 
 const App = () => {
@@ -47,9 +45,6 @@ const App = () => {
 
   };
 
-  const viewInfo = () => {
-    return CardComp
-  };
 
   return (
     <Flex
@@ -115,10 +110,6 @@ const App = () => {
                   <Td p={0}>
                     <ViewIcon
                       fontSize={25}
-                      onClick={() => [
-                      viewInfo({ name, email, index, senha, dataNasc }),
-                      onOpen(),
-                      ]}
                     />
                   </Td>
                 </Tr>
@@ -139,15 +130,6 @@ const App = () => {
           dataEdit={dataEdit}
           setDataEdit={setDataEdit}
         />
-        
-        <CardComp
-        isOpen={isOpen}
-        onClose={onClose}
-        data={data}
-        setData={setData}
-        dataEdit={dataEdit}
-        setDataEdit={setDataEdit}
-      />
       </>
       )}
     </Flex>
